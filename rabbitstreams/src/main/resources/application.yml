@@ -1,0 +1,21 @@
+server:
+  port: 9002
+
+spring:
+  cloud:
+    stream:
+      function:
+        definition: pongProducer;pingProcessor;pingConsumer
+      bindings:
+        pongProducer-out-0:
+          destination: pong-queue
+        pingProcessor-in-0:
+          destination: file-queue
+      rabbit:
+        binder:
+          brokers: localhost:5672
+          auto-create-topics: true
+
+  rabbitmq:
+    username: solera
+    password: solera
